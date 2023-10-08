@@ -1,0 +1,51 @@
+# Run this to calculate DP Grade
+
+def calculate_weighted_score(score, max_score, weight):
+    return (score / max_score) * weight
+
+def determine_grade(total_percentile):
+    if total_percentile >= 97:
+        return 'A+'
+    elif 93 <= total_percentile < 97:
+        return 'A'
+    elif 90 <= total_percentile < 93:
+        return 'A-'
+    elif 87 <= total_percentile < 90:
+        return 'B+'
+    elif 83 <= total_percentile < 87:
+        return 'B'
+    elif 80 <= total_percentile < 83:
+        return 'B-'
+    elif 77 <= total_percentile < 80:
+        return 'C+'
+    elif 73 <= total_percentile < 77:
+        return 'C'
+    elif 70 <= total_percentile < 73:
+        return 'C-'
+    elif 60 <= total_percentile < 70:
+        return 'D'
+    else:
+        return 'F'
+
+def main():
+    lab_assignments_score = float(input("Enter your Lab Assignments score out of 100: "))
+    midterm_score = float(input("Enter your Mid-term score out of 150: "))
+    
+    in_class_assignment_scores = [float(input(f"Enter your In Class Assignment#{i+1} score out of 100: ")) for i in range(5)]
+    
+    project_score = float(input("Enter your combined Project (including Verbal) score out of 100: "))
+    
+    average_in_class_score = sum(in_class_assignment_scores) / 5
+    total_score = (
+        calculate_weighted_score(lab_assignments_score, 100, 18) +
+        calculate_weighted_score(midterm_score, 150, 40) +
+        calculate_weighted_score(average_in_class_score, 100, 10) +
+        calculate_weighted_score(project_score, 100, 32)
+    )
+    
+    grade = determine_grade(total_score)
+    
+    print(f"Your total percentile is {total_score:.2f}% and your grade is {grade}.")
+
+if __name__ == "__main__":
+    main()
