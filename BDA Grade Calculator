@@ -1,0 +1,50 @@
+# Run this to calculate BDA Grade
+
+def calculate_weighted_score(score, max_score, weight):
+    return (score / max_score) * weight
+
+def determine_grade(total_percentile):
+    if total_percentile >= 98:
+        return 'A+'
+    elif 93 <= total_percentile < 98:
+        return 'A'
+    elif 90 <= total_percentile < 93:
+        return 'A-'
+    elif 87 <= total_percentile < 90:
+        return 'B+'
+    elif 82 <= total_percentile < 87:
+        return 'B'
+    elif 80 <= total_percentile < 82:
+        return 'B-'
+    elif 76 <= total_percentile < 80:
+        return 'C+'
+    elif 71 <= total_percentile < 76:
+        return 'C'
+    elif 68 <= total_percentile < 71:
+        return 'C-'
+    elif 65 <= total_percentile < 68:
+        return 'D+'
+    elif 60 <= total_percentile < 65:
+        return 'D'
+    else:
+        return 'F'
+
+def main():
+    in_class_total_score = float(input("Enter your aggregated In-Class Participation and Exercises score out of 10: "))
+    assignments_total_score = float(input("Enter your aggregated Assignments score out of 25: "))
+    final_exam_score = float(input("Enter your Final Exam score out of 35: "))
+    project_score = float(input("Enter your Project Presentation & Delivery score out of 100: "))
+    
+    total_score = (
+        calculate_weighted_score(in_class_total_score, 10, 10) +
+        calculate_weighted_score(assignments_total_score, 25, 25) +
+        calculate_weighted_score(final_exam_score, 35, 35) +
+        calculate_weighted_score(project_score, 100, 30)
+    )
+    
+    grade = determine_grade(total_score)
+    
+    print(f"Your total percentile is {total_score:.2f}% and your grade is {grade}.")
+
+if __name__ == "__main__":
+    main()
